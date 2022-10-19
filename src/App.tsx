@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
 
   const [color, setColor] = useState("");
-  const [answers, setAnswers] = useState < string[]> ([]);
+  const [answers, setAnswers] = useState<string[]>([]);
 
 
   const getRandomColor = () => {
@@ -19,8 +19,8 @@ function App() {
 
   useEffect(() => {
     const actualColor = getRandomColor();
-    setColor(actualColor());
-    setAnswers([actualColor(), getRandomColor(), getRandomColor()].sort(() => 0.5 - Math.random()))
+    setColor(getRandomColor());
+    setAnswers([actualColor, getRandomColor(), getRandomColor()].sort(() => 0.5 - Math.random()))
   }, []);
 
   return (
