@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+
+  const [color, setColor] = useState("");
+  const [answers, setAnswers] = useState < string[]> ([]);
+
+
+  const getRandomColor = () => {
+    const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+
+
+    const color = new Array(6).fill("").map(() => digits[Math.floor(Math.random() * digits.length)]).join("");
+
+    return `#${color}`;
+  };
+
+  useEffect(() => {
+    const actualColor = getRandomColor();
+    setColor(actualColor());
+    setAnswers([actualColor(), getRandomColor(), getRandomColor()].sort(() => 0.5 - Math.random()))
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="guess-me" style={{ background: color }}></div>
+
+      {answers.map(answer => (
+        <button key={answer}>{answer}</button>
+      ))}
     </div>
   );
 }
-
 export default App;
